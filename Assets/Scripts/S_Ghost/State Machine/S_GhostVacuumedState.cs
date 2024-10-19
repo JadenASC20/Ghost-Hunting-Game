@@ -16,12 +16,17 @@ public class S_GhostVacuumedState : S_GhostBaseState
     public override void EnterState(S_GhostStateManager sGhost)
     {
         Debug.Log("Ghost is Being Vacuumed...");
+        //sGhost.layer = 0;
     }
 
     public override void UpdateState(S_GhostStateManager sGhost)
     {
-        if (capturingDevice == null) return; // Ensure capturing device exists
-
+        if (capturingDevice == null)
+        {
+            //sGhost.layer = 3;
+            sGhost.SwitchState(sGhost.FleeState);
+            return; // Ensure capturing device exists
+        }
         // Move the ghost towards the capturing device's position (itself)
         float step = sGhost.agent.speed * Time.deltaTime; // Calculate distance to move
         sGhost.transform.position = Vector3.MoveTowards(sGhost.transform.position, capturingDevice.transform.position, step);
@@ -35,11 +40,6 @@ public class S_GhostVacuumedState : S_GhostBaseState
                 Debug.Log("Ghost has been vacuumed and killed!");
                 // Call method to kill the ghost
                 sGhost.KillGhost();
-            }
-            else
-            {
-                Debug.Log("Ghost did not get captured in time, fleeing...");
-                sGhost.SwitchState(sGhost.FleeState); // Switch to flee state
             }
         }
     }
