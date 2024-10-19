@@ -1,6 +1,11 @@
+//using System.Collections;
+//using System.Collections.Generic;
+//using Unity.VisualScripting;
+//using UnityEngine;
+
+
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,11 +16,11 @@ public class S_GhostStateManager : MonoBehaviour
     public List<Transform> waypoints;
     public Transform chosenWaypoint;
     public float stunPowerMultiplier = 1f;
-    
-    // current active state of the ghost
-    S_GhostBaseState currentState;
 
-    // references to the ghosts state
+    // Current active state of the ghost
+    public S_GhostBaseState currentState;
+
+    // References to the ghost's states
     [HideInInspector] public S_GhostPatrolState PatrolState;
     [HideInInspector] public S_GhostAttackState AttackState;
     [HideInInspector] public S_GhostFleeState FleeState;
@@ -54,6 +59,14 @@ public class S_GhostStateManager : MonoBehaviour
 
     public void PlaySound()
     {
-        // play sound logic
+        // Play sound logic
+    }
+
+    public void KillGhost()
+    {
+        // Handle ghost destruction or death here
+        Debug.Log($"{gameObject.name} has been killed.");
+        // Optionally play death animation or sound
+        Destroy(gameObject); // Example: Destroy the ghost
     }
 }

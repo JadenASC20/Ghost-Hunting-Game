@@ -110,3 +110,4 @@ public class S_GhostFleeState : S_GhostBaseState
         Debug.Log($"Moving to waypoint: {randomWaypoint.name}");
     }
 }
+
