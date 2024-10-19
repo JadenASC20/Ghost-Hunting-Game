@@ -1878,7 +1878,7 @@ Transform:
   m_GameObject: {fileID: 1085556842}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.774282, y: 0.98, z: -16.25}
+  m_LocalPosition: {x: -14.86, y: 0.98, z: -28.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2587,7 +2587,7 @@ Transform:
   m_GameObject: {fileID: 1236619155}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -59.41, y: 0, z: -63.44}
+  m_LocalPosition: {x: -8, y: 0, z: -63.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4007,6 +4007,7 @@ MonoBehaviour:
   - {fileID: 196183593}
   chosenWaypoint: {fileID: 0}
   stunPowerMultiplier: 1
+  currentState: {fileID: 0}
   PatrolState: {fileID: 0}
   AttackState: {fileID: 0}
   FleeState: {fileID: 0}
@@ -4077,7 +4078,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 911ac93f497fbe447b5128904de74a39, type: 2}
+  - {fileID: -876546973899608171, guid: b530046beb8b0c8468ae2b68c00f0b13, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4106,7 +4107,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801776427}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 4c7b6999390a2c24498d13e4084b200f, type: 3}
 --- !u!4 &1801776435
 Transform:
   m_ObjectHideFlags: 0
@@ -4196,7 +4197,7 @@ Transform:
   m_GameObject: {fileID: 2004521856}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.83, y: 0, z: -20.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4308,7 +4309,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
