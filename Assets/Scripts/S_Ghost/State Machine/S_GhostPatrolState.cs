@@ -57,3 +57,4 @@ public class S_GhostPatrolState : S_GhostBaseState
         // Implement spirit box logic here
     }
 }
+ 
