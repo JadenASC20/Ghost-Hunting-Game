@@ -1,9 +1,3 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using Unity.VisualScripting;
-//using UnityEngine;
-
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +11,10 @@ public class S_GhostStateManager : MonoBehaviour
     public Transform chosenWaypoint;
     public float stunPowerMultiplier = 1f;
 
+    // Randomness variables
+    private float randomOffset; // Offset to apply to waypoints
+    private System.Random random; // Random object for unique randomness
+
     // Current active state of the ghost
     public S_GhostBaseState currentState;
 
@@ -26,6 +24,9 @@ public class S_GhostStateManager : MonoBehaviour
     [HideInInspector] public S_GhostFleeState FleeState;
     [HideInInspector] public S_GhostStunState StunState;
     [HideInInspector] public S_GhostVacuumedState VacuumedState;
+
+    // Reference to the GhostManager
+    public GhostManager ghostManager; 
 
     void Start()
     {
@@ -37,8 +38,20 @@ public class S_GhostStateManager : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
 
+        // Initialize random seed
+        random = new System.Random(GetInstanceID());
+        randomOffset = (float)(random.NextDouble() * 2 - 1); // Random value between -1 and 1
+
+        // Set the GhostManager reference for states
+        VacuumedState.SetGhostManager(ghostManager);
+
         currentState = FleeState;
         currentState.EnterState(this);
+    }
+
+    public float GetRandomOffset()
+    {
+        return randomOffset;
     }
 
     void Update()
@@ -64,9 +77,7 @@ public class S_GhostStateManager : MonoBehaviour
 
     public void KillGhost()
     {
-        // Handle ghost destruction or death here
         Debug.Log($"{gameObject.name} has been killed.");
-        // Optionally play death animation or sound
-        Destroy(gameObject); // Example: Destroy the ghost
+        Destroy(gameObject);
     }
 }
