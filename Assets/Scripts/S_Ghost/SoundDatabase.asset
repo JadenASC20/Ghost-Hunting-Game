@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSounds: []
   spiritBoxSoundPatrolling: []
-  spiritBoxError: []
+  spiritBoxError:
+  - {fileID: 8300000, guid: 981b57b570cfb964f904674731ce835f, type: 3}
+  - {fileID: 8300000, guid: cfc0399ba1222514b92f94bb6270e320, type: 3}
+  - {fileID: 8300000, guid: 76c7497a78f152643a620577463061b1, type: 3}
+  musicBox: []
+  ghostCapturingDevice: []
+  flasher: []
