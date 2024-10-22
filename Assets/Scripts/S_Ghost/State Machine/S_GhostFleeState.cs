@@ -6,17 +6,18 @@ using UnityEngine;
 
 public class S_GhostFleeState : S_GhostBaseState
 {
-    private float safeDistance = 25.0f; // Minimum distance from the player to the waypoint
+    private float safeDistance = 5.0f; // Minimum distance from the player to the waypoint
     private Transform playerPosition;
     private float enemyDistanceRun = 4.0f; // Distance from player to trigger fleeing
     private float speed = 15f; // Movement speed of the ghost
-    private float waypointChangeCooldown = 0.5f; // Cooldown time to prevent jitter
-    private float lastWaypointChangeTime = 0f; // Last time the waypoint was changed
+    private float waypointChangeCooldown = 2f; // Cooldown time to prevent jitter
+    private float lastWaypointChangeTime = 1f; // Last time the waypoint was changed
     private Vector3 directionToWaypoint; // Store direction to waypoint for reference
 
     public override void EnterState(S_GhostStateManager sGhost)
     {
         Debug.Log("Ghost is Fleeing...");
+        sGhost.gameObject.layer = 3;        // set ghost to ghostLayer
         playerPosition = sGhost.Player.transform;
         CalculateRandomWaypoint(sGhost);
     }
@@ -66,7 +67,7 @@ public class S_GhostFleeState : S_GhostBaseState
             // Face the direction of movement
             if (directionToWaypoint.magnitude > 0)
             {
-                Quaternion lookRotation = Quaternion.LookRotation(directionToWaypoint);
+                Quaternion lookRotation = Quaternion.LookRotation(directionToWaypoint) * Quaternion.Euler(0, 180, 0);
                 sGhost.transform.rotation = Quaternion.Slerp(sGhost.transform.rotation, lookRotation, Time.deltaTime * 5f);
             }
 
