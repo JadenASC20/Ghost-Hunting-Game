@@ -1,14 +1,14 @@
+
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class GhostCapturingDevice : MonoBehaviour
 {
-    public float sphereRadius = 5f; // Radius of the sphere collider
+    public float sphereRadius = 10f; // Radius of the sphere collider
     private SphereCollider sphereCollider;
 
-    private void Start() // can keep this I guess
+    private void Start()
     {
         // Initialize the sphere collider but keep it disabled for now
         sphereCollider = gameObject.AddComponent<SphereCollider>();
@@ -19,11 +19,26 @@ public class GhostCapturingDevice : MonoBehaviour
 
     private void Update()
     {
-        // Check for the "G" key press to activate the sphere collider
-        if (Input.GetKeyDown(KeyCode.G))
+        // Check if the "G" key is held down
+        if (Input.GetKey(KeyCode.G))
         {
-            Debug.Log("Capturing Device Activated");
-            ActivateSphereCollider();
+            if (!sphereCollider.enabled) // Only activate if it's not already enabled
+            {
+                Debug.Log("Capturing Device Activated");
+                ActivateSphereCollider();
+            }
+
+            // Check for ghosts within the sphere collider while the key is held
+            CheckForGhosts();
+        }
+        else
+        {
+            // Disable the sphere collider when the key is released
+            if (sphereCollider.enabled)
+            {
+                StartCoroutine(DisableColliderAfterDelay(0f)); // Disable immediately
+                StartCoroutine(DestroyAfterDelay(0f)); // Destroy after a delay
+            }
         }
     }
 
@@ -31,14 +46,6 @@ public class GhostCapturingDevice : MonoBehaviour
     {
         sphereCollider.enabled = true; // Enable the sphere collider
         Debug.Log("Sphere Collider Activated!");
-
-        // Check for ghosts within the sphere collider
-        CheckForGhosts();
-
-        // Disable the collider again after a short delay
-        StartCoroutine(DisableColliderAfterDelay(1f)); // Adjust duration as needed
-
-        // Destroy GameObject
     }
 
     private void CheckForGhosts()
@@ -49,23 +56,40 @@ public class GhostCapturingDevice : MonoBehaviour
         {
             if (hitCollider.CompareTag("Ghost"))
             {
-                // TODO: CHANGE THIS FROM INSTEAD THE NEW LOGIC WE IMPLEMENTED
-                NavMeshAgent ghostAgent = hitCollider.GetComponent<NavMeshAgent>();
-                if (ghostAgent != null)
+                S_GhostStateManager ghostManager = hitCollider.GetComponent<S_GhostStateManager>();
+                if (ghostManager != null)
                 {
-                    // Set the destination of the ghost to the position of this GameObject
-                    ghostAgent.SetDestination(transform.position);
-                    Debug.Log($"Ghost {hitCollider.gameObject.name} is now moving to the capturing device.");
+                    // Switch the ghost's state to vacuumed
+                    ghostManager.SwitchState(ghostManager.VacuumedState);
+                    ghostManager.VacuumedState.SetCapturingDevice(this); // Set the capturing device reference
+                    Debug.Log($"Ghost {hitCollider.gameObject.name} is now being vacuumed.");
                 }
             }
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ghost"))
+        {
+            other.gameObject.layer = 0; // Set to layer 0
+            Debug.Log($"Ghost {other.gameObject.name} entered and switched to layer 0.");
+        }
+    }
+
+
     private IEnumerator DisableColliderAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);
-        sphereCollider.enabled = false; // Disable the collider after the delay
+        sphereCollider.enabled = false; // Disable the collider
         Debug.Log("Sphere Collider Deactivated!");
+        yield return null; // Just wait one frame
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Wait for the specified delay
+        Debug.Log("Destroying Capturing Device");
+        Destroy(gameObject); // Destroy the capturing device
     }
 
     private void OnDrawGizmosSelected()

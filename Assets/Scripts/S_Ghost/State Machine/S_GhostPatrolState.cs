@@ -1,93 +1,45 @@
-
-//using TMPro;
-//using UnityEngine;
-//using UnityEngine.AI;
-//using UnityEngine.Rendering.UI;
-
-//public class S_GhostPatrolState : S_GhostBaseState
-//{
-
-//    // The Ghost will be passive in this state and roams the halls, Player can interact with the environment and see ghosts from this state using a spirit box
-
-//    // Goals
-//    // 1. Player can communicate with the ghost in this state
-//    // if the player is using a spirit box
-//    // play a random sound
-
-//    // 2. Ghost is patrolling around the room in a small circle
-
-
-//    public override void EnterState(S_GhostStateManager sGhost)
-//    {
-//        Debug.Log("Ghost is Patrolling...");
-
-
-//    }
-
-//    public override void UpdateState(S_GhostStateManager sGhost)
-//    {
-//        //waonder in a circle
-//        //if (Vector3.Distance(sGhost.transform.position, sGhost.chosenWaypoint.position) < 1f)
-//        //{
-//        //    Debug.Log("Successfully Stopped Moving");
-//        //}
-
-
-//    }
-
-//    public override void OnSpiritTriggerEnter(S_GhostStateManager sGhost, Collider collider)
-//    {
-//        GameObject other = collider.gameObject;
-//        if (other.CompareTag("Player"))
-//        {
-//            Debug.Log("PLAYER NEARBY RUN");
-//            sGhost.SwitchState(sGhost.FleeState);
-//        }
-//    }
-
-//    public override void UseSpiritBox(S_GhostStateManager sGhost)
-//    {
-
-//    }
-
-//}
-
-
-using TMPro;
 using UnityEngine;
 
 public class S_GhostPatrolState : S_GhostBaseState
 {
-    private float patrolRadius = 2f; // Adjust for circle size
     private float patrolSpeed = 2f; // Speed during patrol
-    private float patrolAngle = 0f; // Used for circular movement
+    private float reachedThreshold = 0.1f; // Distance to consider the waypoint reached
+    private Transform targetWaypoint; // Current target waypoint
 
     public override void EnterState(S_GhostStateManager sGhost)
     {
         Debug.Log("Ghost is Patrolling...");
-        patrolAngle = Random.Range(0f, 360f); // Start at a random angle
+        ChooseRandomWaypoint(sGhost); // Choose a random waypoint when entering patrol state
     }
 
     public override void UpdateState(S_GhostStateManager sGhost)
     {
-        if (sGhost.chosenWaypoint != null)
+        if (targetWaypoint == null) return; // No target waypoint
+
+        // Move towards the current target waypoint
+        sGhost.transform.position = Vector3.MoveTowards(sGhost.transform.position, targetWaypoint.position, patrolSpeed * Time.deltaTime);
+
+        // Check if the ghost has reached the waypoint
+        if (Vector3.Distance(sGhost.transform.position, targetWaypoint.position) < reachedThreshold)
         {
-            // Calculate the new patrol position in a circle
-            patrolAngle += Time.deltaTime * patrolSpeed; // Increment angle
-            float xOffset = Mathf.Cos(patrolAngle) * patrolRadius;
-            float zOffset = Mathf.Sin(patrolAngle) * patrolRadius;
-
-            Vector3 patrolPosition = sGhost.chosenWaypoint.position + new Vector3(xOffset, 0, zOffset);
-            sGhost.transform.position = Vector3.MoveTowards(sGhost.transform.position, patrolPosition, patrolSpeed * Time.deltaTime);
-
-            // Face the direction of movement
-            Vector3 direction = patrolPosition - sGhost.transform.position;
-            if (direction.magnitude > 0)
-            {
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                sGhost.transform.rotation = Quaternion.Slerp(sGhost.transform.rotation, lookRotation, Time.deltaTime * 5f);
-            }
+            ChooseRandomWaypoint(sGhost); // Choose a new random waypoint upon reaching the current one
         }
+
+        // Face the direction of movement
+        Vector3 direction = targetWaypoint.position - sGhost.transform.position;
+        if (direction.magnitude > 0)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180, 0);
+            sGhost.transform.rotation = Quaternion.Slerp(sGhost.transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+    }
+
+    private void ChooseRandomWaypoint(S_GhostStateManager sGhost)
+    {
+        if (sGhost.waypoints.Count == 0) return; // No waypoints to choose from
+
+        int randomIndex = Random.Range(0, sGhost.waypoints.Count); // Select a random index
+        targetWaypoint = sGhost.waypoints[randomIndex]; // Set the target waypoint
     }
 
     public override void OnSpiritTriggerEnter(S_GhostStateManager sGhost, Collider collider)
@@ -105,3 +57,4 @@ public class S_GhostPatrolState : S_GhostBaseState
         // Implement spirit box logic here
     }
 }
+ 

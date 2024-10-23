@@ -13,8 +13,8 @@ TagManager:
   - GhostLayer
   - Water
   - UI
-  - 
-  - 
+  - WallLayer
+  - InteractableLayer
   - 
   - 
   - 
