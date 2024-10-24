@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SoundDatabase
   m_EditorClassIdentifier: 
   normalSounds:
-  - {fileID: 8300000, guid: ba5e633efc7f25947a7f466628619cf2, type: 3}
+  - {fileID: 8300000, guid: 1ca7ff68147bb9244932c45dae9671a5, type: 3}
   - {fileID: 8300000, guid: 80f8d73284dd5b246baead0937ae4028, type: 3}
-  - {fileID: 8300000, guid: d4da672988904594ca520dcb9eb2ef76, type: 3}
+  - {fileID: 8300000, guid: 6c84a169422d02844aea0eb17839d35e, type: 3}
   - {fileID: 8300000, guid: 53aaf4651e5b03b458a0f189f0b51eab, type: 3}
   - {fileID: 8300000, guid: df93682a91810224584754d171ee6f2c, type: 3}
   - {fileID: 8300000, guid: 4291c877d58bfd4409e197446fa9b48f, type: 3}
