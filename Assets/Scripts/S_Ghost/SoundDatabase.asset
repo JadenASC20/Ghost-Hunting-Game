@@ -12,12 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832769d67c5fef3468714791a3b762a8, type: 3}
   m_Name: SoundDatabase
   m_EditorClassIdentifier: 
-  normalSounds: []
+  normalSounds:
+  - {fileID: 8300000, guid: ba5e633efc7f25947a7f466628619cf2, type: 3}
+  - {fileID: 8300000, guid: 80f8d73284dd5b246baead0937ae4028, type: 3}
+  - {fileID: 8300000, guid: d4da672988904594ca520dcb9eb2ef76, type: 3}
+  - {fileID: 8300000, guid: 53aaf4651e5b03b458a0f189f0b51eab, type: 3}
+  - {fileID: 8300000, guid: df93682a91810224584754d171ee6f2c, type: 3}
+  - {fileID: 8300000, guid: 4291c877d58bfd4409e197446fa9b48f, type: 3}
+  - {fileID: 8300000, guid: 87040191998b26c4f83f96b06a70cb49, type: 3}
+  - {fileID: 8300000, guid: 74997f7327ec1b640bf3b937a1cb04d6, type: 3}
+  - {fileID: 8300000, guid: 23e7577c1335d1c479230493ed369f67, type: 3}
   spiritBoxSoundPatrolling: []
   spiritBoxError:
   - {fileID: 8300000, guid: 981b57b570cfb964f904674731ce835f, type: 3}
   - {fileID: 8300000, guid: cfc0399ba1222514b92f94bb6270e320, type: 3}
   - {fileID: 8300000, guid: 76c7497a78f152643a620577463061b1, type: 3}
-  musicBox: []
+  musicBox:
+  - {fileID: 8300000, guid: 9e04869ced24f3542b462b0cfeec1080, type: 3}
+  - {fileID: 8300000, guid: 63b75d2a49860ac4da2c0bd76de6a6b3, type: 3}
+  - {fileID: 8300000, guid: 2563704c85820ca4c8ac5360f63122d7, type: 3}
   ghostCapturingDevice: []
   flasher: []

@@ -1,5 +1,4 @@
 
-
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +7,16 @@ public class GhostCapturingDevice : MonoBehaviour
     public float sphereRadius = 10f; // Radius of the sphere collider
     private SphereCollider sphereCollider;
 
+    // Reference to the sound database
+    public S_GhostSoundDatabase soundDatabase; // Assign this in the inspector
+    private AudioSource audioSource;
+
+    // Index for the activation sound clip
+    public int activationSoundIndex = 0; // Sound index for activation
+
+    // Flag to check if the activation sound has been played
+    private bool hasActivated = false;
+
     private void Start()
     {
         // Initialize the sphere collider but keep it disabled for now
@@ -15,6 +24,9 @@ public class GhostCapturingDevice : MonoBehaviour
         sphereCollider.isTrigger = true;
         sphereCollider.radius = sphereRadius;
         sphereCollider.enabled = false; // Initially disabled
+
+        // Initialize the audio source
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void Update()
@@ -33,12 +45,22 @@ public class GhostCapturingDevice : MonoBehaviour
         }
         else
         {
-            // Disable the sphere collider when the key is released
+            // Disable the sphere collider and reset sound flags when the key is released
             if (sphereCollider.enabled)
             {
                 StartCoroutine(DisableColliderAfterDelay(0f)); // Disable immediately
                 StartCoroutine(DestroyAfterDelay(0f)); // Destroy after a delay
             }
+
+            // Reset sound play flag
+            hasActivated = false;
+            StopSound(); // Stop any currently playing sounds
+        }
+
+        // Check if the "I" key is held down for destruction after sound ends
+        if (Input.GetKey(KeyCode.I) && hasActivated && !audioSource.isPlaying)
+        {
+            StartCoroutine(DestroyAfterDelay(0f)); // Destroy immediately if sound has ended
         }
     }
 
@@ -46,6 +68,13 @@ public class GhostCapturingDevice : MonoBehaviour
     {
         sphereCollider.enabled = true; // Enable the sphere collider
         Debug.Log("Sphere Collider Activated!");
+
+        // Play activation sound only once
+        if (!hasActivated)
+        {
+            PlaySoundAtIndex(activationSoundIndex); // Play activation sound
+            hasActivated = true; // Set the flag to true
+        }
     }
 
     private void CheckForGhosts()
@@ -62,9 +91,33 @@ public class GhostCapturingDevice : MonoBehaviour
                     // Switch the ghost's state to vacuumed
                     ghostManager.SwitchState(ghostManager.VacuumedState);
                     ghostManager.VacuumedState.SetCapturingDevice(this); // Set the capturing device reference
+
                     Debug.Log($"Ghost {hitCollider.gameObject.name} is now being vacuumed.");
                 }
             }
+        }
+    }
+
+    private void PlaySoundAtIndex(int index)
+    {
+        if (soundDatabase != null && soundDatabase.normalSounds.Length > index)
+        {
+            // Select the sound at the specified index
+            AudioClip selectedSound = soundDatabase.normalSounds[index];
+            audioSource.clip = selectedSound;
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Sound database is not assigned or index is out of bounds!");
+        }
+    }
+
+    private void StopSound()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
         }
     }
 
@@ -76,7 +129,6 @@ public class GhostCapturingDevice : MonoBehaviour
             Debug.Log($"Ghost {other.gameObject.name} entered and switched to layer 0.");
         }
     }
-
 
     private IEnumerator DisableColliderAfterDelay(float delay)
     {
