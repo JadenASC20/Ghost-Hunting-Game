@@ -154,6 +154,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 874512102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &60216108 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+    type: 3}
+  m_PrefabInstance: {fileID: 2023987688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &80000477
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,16 +236,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: vacuumDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 981949746846426964, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: m_Name
       value: FinalizedGhostVar2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 981949746846426964, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 468269343}
+    - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: ghostHealthManager
+      value: 
+      objectReference: {fileID: 1518805814}
     - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -402,16 +434,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1589181431986244061, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: m_Name
       value: FinalizedGhostVar1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 468269343}
+    - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: ghostHealthManager
+      value: 
+      objectReference: {fileID: 1567300299}
     - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -570,7 +617,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1567300298}
   m_SourcePrefab: {fileID: 100100000, guid: 43c19e287cbb4e24f8dd01061202215b, type: 3}
 --- !u!1 &230379136
 GameObject:
@@ -611,16 +662,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: vacuumDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 981949746846426964, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: m_Name
       value: FinalizedGhostVar2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 981949746846426964, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 468269343}
+    - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: ghostHealthManager
+      value: 
+      objectReference: {fileID: 1626014284}
     - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -820,16 +891,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: vacuumDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 981949746846426964, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: m_Name
       value: FinalizedGhostVar2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 981949746846426964, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 468269343}
+    - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: ghostHealthManager
+      value: 
+      objectReference: {fileID: 1392308873}
     - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -1642,7 +1733,7 @@ Transform:
   m_GameObject: {fileID: 777090158}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.183859, y: 0.279, z: 0.92}
+  m_LocalPosition: {x: -2.11, y: 1.45, z: 0.92}
   m_LocalScale: {x: 0.37539, y: 0.37539, z: 0.37539}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1660,7 +1751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196da55fb8a7bd244a54ce6314af2637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereRadius: 10
+  sphereRadius: 15
   soundDatabase: {fileID: 11400000, guid: 7f207dd6e688d394a809c2ff6ddcc815, type: 2}
   activationSoundIndex: 7
 --- !u!1 &782257327
@@ -1861,6 +1952,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1589181431986244061, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1589181431986244061, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: vacuumDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: m_Name
@@ -1871,6 +1972,11 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 468269343}
+    - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: ghostHealthManager
+      value: 
+      objectReference: {fileID: 1351625346}
     - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -2070,16 +2176,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1589181431986244061, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: m_Name
       value: FinalizedGhostVar1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 468269343}
+    - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: ghostHealthManager
+      value: 
+      objectReference: {fileID: 1756792246}
     - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -2238,7 +2359,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1756792245}
   m_SourcePrefab: {fileID: 100100000, guid: 43c19e287cbb4e24f8dd01061202215b, type: 3}
 --- !u!1001 &1242512291
 PrefabInstance:
@@ -2248,16 +2373,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1589181431986244061, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: m_Name
       value: FinalizedGhostVar1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 468269343}
+    - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      propertyPath: ghostHealthManager
+      value: 
+      objectReference: {fileID: 1697307156}
     - target: {fileID: 5666185447315129356, guid: 43c19e287cbb4e24f8dd01061202215b,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -2416,8 +2556,24 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1697307155}
   m_SourcePrefab: {fileID: 100100000, guid: 43c19e287cbb4e24f8dd01061202215b, type: 3}
+--- !u!114 &1248077295 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+    type: 3}
+  m_PrefabInstance: {fileID: 2018482561}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1332183554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,6 +2605,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 874512102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1351625346 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1589181431986244061, guid: 43c19e287cbb4e24f8dd01061202215b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1025053966}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1392308873 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+    type: 3}
+  m_PrefabInstance: {fileID: 340374786}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1407615458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2573,6 +2753,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 874512102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1518805814 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+    type: 3}
+  m_PrefabInstance: {fileID: 147094556}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1567300289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
+    type: 3}
+  m_PrefabInstance: {fileID: 216945562}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1567300298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567300289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  vacuumTickRate: 1
+  vacuumDamage: 1
+--- !u!114 &1567300299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1589181431986244061, guid: 43c19e287cbb4e24f8dd01061202215b,
+    type: 3}
+  m_PrefabInstance: {fileID: 216945562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567300289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1573441795
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,6 +2829,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1626014284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+    type: 3}
+  m_PrefabInstance: {fileID: 268461671}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1642963319
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,6 +2903,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 874512102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1697307146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1242512291}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1697307155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697307146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  vacuumTickRate: 1
+  vacuumDamage: 1
+--- !u!114 &1697307156 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1589181431986244061, guid: 43c19e287cbb4e24f8dd01061202215b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1242512291}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697307146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1756792236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4770002486543391825, guid: 43c19e287cbb4e24f8dd01061202215b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1050416509}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1756792245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756792236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  vacuumTickRate: 1
+  vacuumDamage: 1
+--- !u!114 &1756792246 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1589181431986244061, guid: 43c19e287cbb4e24f8dd01061202215b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1050416509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756792236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1926311594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2788,16 +3091,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: vacuumDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 981949746846426964, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: m_Name
       value: FinalizedGhostVar2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 981949746846426964, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 468269343}
+    - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: ghostHealthManager
+      value: 
+      objectReference: {fileID: 1248077295}
     - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -2966,16 +3289,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 721498959112523314, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: vacuumDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 981949746846426964, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: m_Name
       value: FinalizedGhostVar2
+      objectReference: {fileID: 0}
+    - target: {fileID: 981949746846426964, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 468269343}
+    - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
+        type: 3}
+      propertyPath: ghostHealthManager
+      value: 
+      objectReference: {fileID: 60216108}
     - target: {fileID: 7673052469967101671, guid: 6820deeba10794747a197bee73468e79,
         type: 3}
       propertyPath: waypoints.Array.size
