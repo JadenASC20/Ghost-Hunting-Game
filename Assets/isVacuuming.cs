@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -18,61 +19,73 @@ public class isVacuuming : MonoBehaviour
     public GameObject ghostCaptureExplosion;
     public float delay = 2.0f; // Delay in seconds
 
-    void Start()
+    private SphereCollider sphereCollider;
+    private float sphereRadius = 2f;
+
+    void OnEnable()
     {
-        //SpawnMeshCollider();
+        SpawnVacuumCollider();
+    }
+
+    private void OnDisable()
+    {
+        DeleteVacuumCollider();
+        
+    }
+
+    void Update()
+    {
+        CheckforGhosts();
+    }
+
+
+    private void CheckforGhosts()
+    {
+        // Check for ghosts within the sphere
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, sphereRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Ghost"))
+            {
+                // essentially vacuuming would be handled here
+                // ...
+
+                if (particlesObject != null)
+                {
+                    particlesObject.SetActive(true);
+                    PlayAllParticleSystems(particlesObject);
+                    //DocumentCaptureProgress(ghostHealth);
+                }
+                else
+                {
+                    Debug.LogWarning("Target Object is not assigned.");
+                }
+                Debug.Log("Ghost Found!!!!");
+                break;
+            }
+            else
+            {
+                particlesObject.SetActive(false);
+            }
+        }
     }
 
     // Update is called once per frame
 
-    //private void SpawnMeshCollider()
-    //{
-    //    // Create a new GameObject for the mesh collider
-    //    GameObject colliderObject = new GameObject("GhostCollider");
-
-    //    // Set position and rotation
-    //    colliderObject.transform.position = spawnPosition;
-    //    colliderObject.transform.rotation = Quaternion.Euler(0, -180f, 0);
-
-
-    //    // Add MeshFilter and MeshCollider components
-    //    MeshFilter meshFilter = colliderObject.AddComponent<MeshFilter>();
-    //    MeshCollider meshCollider = colliderObject.AddComponent<MeshCollider>();
-
-    //    // Assign the mesh
-    //    meshFilter.mesh = mesh;
-    //    meshCollider.sharedMesh = mesh;
-
-    //    // Enable the collider
-    //    meshCollider.convex = true; // Set to true if you need it to detect collisions with dynamic objects
-        
-
-    //}
-
-    void Update()
+    private void SpawnVacuumCollider()
     {
-        
+        sphereCollider = gameObject.AddComponent<SphereCollider>();
+        sphereCollider.isTrigger = true;
+        sphereCollider.radius = sphereRadius;
+        sphereCollider.enabled = true;
+        sphereCollider.center = new Vector3(0f, 1.7f, 0f);
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void DeleteVacuumCollider()
     {
-        // Check if the collided object has the tag "Ghost"
-        Debug.Log("COLLIDED!!!!!");
-        if (other.CompareTag("Ghost"))
+        if (sphereCollider != null)
         {
-            Debug.Log("Ghost detected: " + other.name);
-            // essentially vacuuming would be handled here
-            // ...
-
-            if (particlesObject != null)
-            {
-                PlayAllParticleSystems(particlesObject);
-                //DocumentCaptureProgress(ghostHealth);
-            }
-            else
-            {
-                Debug.LogWarning("Target Object is not assigned.");
-            }
+            Destroy(sphereCollider);
+            Debug.Log("SphereCollider deleted.");
         }
     }
 
@@ -108,5 +121,11 @@ public class isVacuuming : MonoBehaviour
 
         // Disable the GameObject
         ghostCaptureExplosion.SetActive(false);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(sphereCollider.center, sphereRadius);
     }
 }
