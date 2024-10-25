@@ -12,41 +12,40 @@ public class S_GhostStateManager : MonoBehaviour
     public float stunPowerMultiplier = 1f;
 
     // Randomness variables
-    private float randomOffset; // Offset to apply to waypoints
-    private System.Random random; // Random object for unique randomness
+    private float randomOffset;
+    private System.Random random;
 
-    // Current active state of the ghost
     public S_GhostBaseState currentState;
 
-    // References to the ghost's states
     [HideInInspector] public S_GhostPatrolState PatrolState;
     [HideInInspector] public S_GhostAttackState AttackState;
     [HideInInspector] public S_GhostFleeState FleeState;
     [HideInInspector] public S_GhostStunState StunState;
     [HideInInspector] public S_GhostVacuumedState VacuumedState;
 
-    // Reference to the GhostManager
-    public GhostManager ghostManager; 
+    // Reference to the GhostHealthManager
+    public S_GhostHealthManager ghostHealthManager;
 
     void Start()
     {
+        // Initialize states
         PatrolState = new S_GhostPatrolState();
         AttackState = new S_GhostAttackState();
         FleeState = new S_GhostFleeState();
         StunState = new S_GhostStunState();
         VacuumedState = new S_GhostVacuumedState();
 
+        // Get the NavMeshAgent and the health manager component
         agent = GetComponent<NavMeshAgent>();
+        ghostHealthManager = GetComponent<S_GhostHealthManager>();
 
-        // Initialize random seed
-        random = new System.Random(GetInstanceID());
-        randomOffset = (float)(random.NextDouble() * 2 - 1); // Random value between -1 and 1
-
-        // Set the GhostManager reference for states
-        VacuumedState.SetGhostManager(ghostManager);
-
+        // Set the initial state
         currentState = FleeState;
         currentState.EnterState(this);
+
+        // Random offset for ghost behavior
+        random = new System.Random(GetInstanceID());
+        randomOffset = (float)(random.NextDouble() * 2 - 1); // Random value between -1 and 1
     }
 
     public float GetRandomOffset()
@@ -73,6 +72,7 @@ public class S_GhostStateManager : MonoBehaviour
     public void PlaySound()
     {
         // Play sound logic
+
     }
 
     public void KillGhost()
@@ -81,3 +81,5 @@ public class S_GhostStateManager : MonoBehaviour
         Destroy(gameObject);
     }
 }
+
+

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1036791858701291171}
   - component: {fileID: 7673052469967101671}
   - component: {fileID: 5350671403095270903}
+  - component: {fileID: 721498959112523314}
   m_Layer: 3
   m_Name: FinalizedGhostVar2
   m_TagString: Ghost
@@ -163,6 +164,7 @@ MonoBehaviour:
   FleeState: {fileID: 0}
   StunState: {fileID: 0}
   VacuumedState: {fileID: 0}
+  ghostHealthManager: {fileID: 0}
 --- !u!195 &5350671403095270903
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -185,3 +187,19 @@ NavMeshAgent:
   m_BaseOffset: 112.04463
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &721498959112523314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981949746846426964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d84a64dd58334e8a2e7c61db75822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  vacuumTickRate: 1
+  vacuumDamage: 10
