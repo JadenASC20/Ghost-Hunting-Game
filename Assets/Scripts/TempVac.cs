@@ -8,6 +8,9 @@ public class TempVac : MonoBehaviour
     public InputActionReference gripInputActionReference;
     public InputActionReference triggerInputActionReference;
 
+    public GameObject isVacuuming;
+    public GameObject isFlashing;
+
     private float _gripValue;
     private float _triggerValue;
 
@@ -56,11 +59,27 @@ public class TempVac : MonoBehaviour
     private void HandleGripAction(float value)
     {
         // Handles the Flashing
+        if (value > 0) {
+            isFlashing.SetActive(true);
+        }
+        else
+        {
+            isFlashing.SetActive(false);
+        }
     }
 
     private void HandleTriggerAction(float value)
     {
         // YHandles the Vacuuming
+        if (value > 0)
+        {
+            isVacuuming.SetActive(true);
+        }
+        else
+        {
+            isVacuuming.SetActive(false);
+        }
+
 
     }
 }
