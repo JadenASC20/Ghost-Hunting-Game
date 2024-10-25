@@ -10,6 +10,7 @@ public class isVacuuming : MonoBehaviour
     // The mesh to use for the collider
 
     // Position and rotation for the collider
+    public Transform attractPoint;
     public Vector3 spawnPosition = Vector3.zero;
     public Quaternion spawnRotation = Quaternion.identity;
 
@@ -60,6 +61,17 @@ public class isVacuuming : MonoBehaviour
                 {
                     Debug.LogWarning("Target Object is not assigned.");
                 }
+
+                S_GhostStateManager ghostManager = hitCollider.GetComponent<S_GhostStateManager>();
+                if (ghostManager != null)
+                {
+                    // Switch the ghost's state to vacuumed
+                    ghostManager.SwitchState(ghostManager.VacuumedState);
+                    //ghostManager.VacuumedState.SetCapturingDevice(this); // Set the capturing device reference
+
+                    Debug.Log($"Ghost {hitCollider.gameObject.name} is now being vacuumed.");
+                }
+
                 Debug.Log("Ghost Found!!!!");
                 break;
             }
