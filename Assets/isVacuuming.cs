@@ -43,43 +43,43 @@ public class isVacuuming : MonoBehaviour
     private void CheckforGhosts()
     {
         // Check for ghosts within the sphere
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, sphereRadius);
-        foreach (var hitCollider in hitColliders)
-        {
-            if (hitCollider.CompareTag("Ghost"))
-            {
-                // essentially vacuuming would be handled here
-                // ...
+        //Collider[] hitColliders = Physics.OverlapSphere(transform.position, sphereRadius);
+        //foreach (var hitCollider in hitColliders)
+        //{
+        //    if (hitCollider.CompareTag("Ghost"))
+        //    {
+        //        // essentially vacuuming would be handled here
+        //        // ...
 
-                if (particlesObject != null)
-                {
-                    particlesObject.SetActive(true);
-                    PlayAllParticleSystems(particlesObject);
-                    //DocumentCaptureProgress(ghostHealth);
-                }
-                else
-                {
-                    Debug.LogWarning("Target Object is not assigned.");
-                }
+        //        if (particlesObject != null)
+        //        {
+        //            particlesObject.SetActive(true);
+        //            PlayAllParticleSystems(particlesObject);
+        //            //DocumentCaptureProgress(ghostHealth);
+        //        }
+        //        else
+        //        {
+        //            Debug.LogWarning("Target Object is not assigned.");
+        //        }
 
-                S_GhostStateManager ghostManager = hitCollider.GetComponent<S_GhostStateManager>();
-                if (ghostManager != null)
-                {
-                    // Switch the ghost's state to vacuumed
-                    ghostManager.SwitchState(ghostManager.VacuumedState);
-                    //ghostManager.VacuumedState.SetCapturingDevice(this); // Set the capturing device reference
+        //        //S_GhostStateManager ghostManager = hitCollider.GetComponent<S_GhostStateManager>();
+        //        //if (ghostManager != null)
+        //        //{
+        //        //    // Switch the ghost's state to vacuumed
+        //        //    ghostManager.SwitchState(ghostManager.VacuumedState);
+        //        //    //ghostManager.VacuumedState.SetCapturingDevice(this); // Set the capturing device reference
 
-                    Debug.Log($"Ghost {hitCollider.gameObject.name} is now being vacuumed.");
-                }
+        //        //    Debug.Log($"Ghost {hitCollider.gameObject.name} is now being vacuumed.");
+        //        //}
 
-                Debug.Log("Ghost Found!!!!");
-                break;
-            }
-            else
-            {
-                particlesObject.SetActive(false);
-            }
-        }
+        //        Debug.Log("Ghost Found!!!!");
+        //        break;
+        //    }
+        //    else
+        //    {
+        //        particlesObject.SetActive(false);
+        //    }
+        //}
     }
 
     // Update is called once per frame
