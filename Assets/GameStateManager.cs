@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject player; // Reference to the player GameObject
+    public Transform spawnLocation; // Reference to the spawn location
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        // Spawn the player at the spawn location
+        if (player != null && spawnLocation != null)
+        {
+            player.transform.position = spawnLocation.position;
+            player.transform.rotation = spawnLocation.rotation; // Optional: Set rotation
+        }
     }
 }

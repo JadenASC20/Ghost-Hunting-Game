@@ -37,7 +37,7 @@ public class SoundManager : MonoBehaviour
             case "spiritBoxError":
                 return soundDatabase.spiritBoxError;
             case "musicBox":
-                return soundDatabase.musicBox;
+                return soundDatabase.musicBoxSounds;
             case "ghostCapturingDevice":
                 return soundDatabase.ghostCapturingDevice;
             case "flasher":

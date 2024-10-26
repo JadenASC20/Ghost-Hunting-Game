@@ -1,9 +1,7 @@
-
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Flasher : MonoBehaviour
 {
@@ -16,56 +14,74 @@ public class Flasher : MonoBehaviour
 
     // Index to select a specific sound from the normalSounds array
     public int soundIndex = 0; // Default index
+    private bool isPlaying = false; // Flag to check if a sound is currently playing
 
-    private void Start()
+    private XRGrabInteractable grabInteractable;
+    private Rigidbody rb;
+
+    private void Awake()
     {
-        // Initialize the sphere collider
+        InitializeComponents();
+        grabInteractable.selectExited.AddListener(OnThrow);
+    }
+
+    private void OnDestroy()
+    {
+        grabInteractable.selectExited.RemoveListener(OnThrow);
+    }
+
+    private void InitializeComponents()
+    {
         sphereCollider = gameObject.AddComponent<SphereCollider>();
-        sphereCollider.isTrigger = true; // Set as a trigger
-        sphereCollider.radius = sphereRadius; // Set the radius
-        sphereCollider.enabled = false; // Initially disabled
+        sphereCollider.isTrigger = true;
+        sphereCollider.radius = sphereRadius;
+        sphereCollider.enabled = false;
 
-        // Initialize the audio source
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = 0.5f; // Set fixed volume
+        grabInteractable = GetComponent<XRGrabInteractable>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        // Toggle the sphere collider with the "F" key
-        if (Input.GetKeyDown(KeyCode.F))
+        if (collision.gameObject.layer == 0) // Check for "Default" layer
         {
-            Debug.Log("Flasher Used");
-            ToggleCollider();
+            Debug.Log("Flasher Activated");
+            ActivateSphereCollider();
         }
     }
 
-    private void ToggleCollider()
+    private void ActivateSphereCollider()
     {
-        sphereCollider.enabled = !sphereCollider.enabled;
+        sphereCollider.enabled = true;
+        Debug.Log("Sphere Collider Activated!");
 
-        if (sphereCollider.enabled)
+        if (!isPlaying)
         {
-            Debug.Log("Sphere Collider Activated!");
-            PlaySoundAtIndex(soundIndex); // Play sound at the specified index
+            PlaySoundAtIndex(soundIndex);
+        }
 
-            CheckForObjectsInVicinity();
-            // Optionally destroy after a short duration
-            Destroy(gameObject, 2f); // Destroys the flasher after 2 seconds
-        }
-        else
-        {
-            Debug.Log("Sphere Collider Deactivated!");
-        }
+        CheckForObjectsInVicinity();
+        StartCoroutine(DisableColliderAfterDelay(1f));
+    }
+
+    private IEnumerator DisableColliderAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        sphereCollider.enabled = false;
+        Debug.Log("Sphere Collider Deactivated!");
     }
 
     private void PlaySoundAtIndex(int index)
     {
         if (soundDatabase != null && soundDatabase.normalSounds.Length > index)
         {
-            // Select the sound at the specified index
-            AudioClip selectedSound = soundDatabase.normalSounds[index];
-            audioSource.clip = selectedSound;
+            audioSource.clip = soundDatabase.normalSounds[index];
             audioSource.Play();
+            isPlaying = true;
+
+            StartCoroutine(ResetPlayingFlag(audioSource.clip.length));
         }
         else
         {
@@ -73,32 +89,43 @@ public class Flasher : MonoBehaviour
         }
     }
 
+    private IEnumerator ResetPlayingFlag(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isPlaying = false;
+        Destroy(gameObject); // Optionally destroy the flasher
+    }
+
     private void CheckForObjectsInVicinity()
     {
-        // Check for objects within the collider's radius
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, sphereRadius);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Ghost"))
             {
-                // Get the state manager
-                S_GhostStateManager sGhost = hitCollider.GetComponent<S_GhostStateManager>();
-                if (sGhost != null)
-                {
-                    // Set the stun power multiplier if needed
-                    sGhost.stunPowerMultiplier = 2f; // This can be adjusted based on your logic
-
-                    // Switch to the stun state immediately
-                    sGhost.SwitchState(sGhost.StunState);
-                    Debug.Log("Ghost has been stunned!");
-                }
+                HandleGhost(hitCollider);
             }
         }
     }
 
+    private void HandleGhost(Collider ghostCollider)
+    {
+        S_GhostStateManager sGhost = ghostCollider.GetComponent<S_GhostStateManager>();
+        if (sGhost != null)
+        {
+            sGhost.stunPowerMultiplier = 2f;
+            sGhost.SwitchState(sGhost.StunState);
+            Debug.Log("Ghost has been stunned!");
+        }
+    }
+
+    private void OnThrow(SelectExitEventArgs arg)
+    {
+        // Handle logic after the object is thrown, if needed
+    }
+
     private void OnDrawGizmosSelected()
     {
-        // Draw the sphere in the editor for visualization
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sphereRadius);
     }

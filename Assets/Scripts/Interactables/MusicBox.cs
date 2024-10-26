@@ -1,26 +1,47 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MusicBox : MonoBehaviour
 {
     public float sphereRadius = 5f; // Radius of the sphere collider
     private SphereCollider sphereCollider;
 
-    private void Start()
+    // Reference to the sound database
+    public S_GhostSoundDatabase soundDatabase; // Assign this in the inspector
+    private AudioSource audioSource;
+
+    // Flag to check if a sound is currently playing
+    private bool isPlaying = false;
+
+    // Reference to the player
+    public Transform player; // Assign this in the inspector
+    public float maxDistance = 5f; // Maximum distance to hear the sound
+
+    // Fixed volume for the sound
+    public float fixedVolume = 0.5f; // Set this in the inspector or code
+
+    private void Activate()
     {
         // Initialize the sphere collider but keep it disabled for now
         sphereCollider = gameObject.AddComponent<SphereCollider>();
         sphereCollider.isTrigger = true;
         sphereCollider.radius = sphereRadius;
         sphereCollider.enabled = false; // Initially disabled
+
+        // Initialize the audio source
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = fixedVolume; // Set the fixed volume for the AudioSource
     }
 
     private void Update()
     {
-        // Check for the "G" key press to activate the sphere collider
-        if (Input.GetKeyDown(KeyCode.M))
+        // Volume adjustment can be removed if not needed
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Check if the object collided with the ground layer
+        if (collision.gameObject.layer == 0)
         {
             Debug.Log("Capturing Device Activated");
             ActivateSphereCollider();
@@ -32,15 +53,44 @@ public class MusicBox : MonoBehaviour
         sphereCollider.enabled = true; // Enable the sphere collider
         Debug.Log("Sphere Collider Activated!");
 
+        // Play a random activation sound only if no sound is currently playing
+        if (!isPlaying)
+        {
+            PlayRandomSound(); // No volume parameter needed
+        }
+
         // Check for ghosts within the sphere collider
         CheckForGhosts();
 
         // Disable the collider again after a short delay
         StartCoroutine(DisableColliderAfterDelay(1f)); // Adjust duration as needed
+    }
 
-        // Destroy GameObject after music is played
-        // Also should be interupted and destroyed depending on if player decides to stun/vacuum
+    private void PlayRandomSound()
+    {
+        if (soundDatabase != null && soundDatabase.musicBoxSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, soundDatabase.musicBoxSounds.Length);
+            AudioClip selectedSound = soundDatabase.musicBoxSounds[randomIndex];
+            audioSource.clip = selectedSound;
+            audioSource.Play();
+            isPlaying = true; // Set the flag to indicate a sound is playing
+            Debug.Log($"Playing sound: {selectedSound.name}");
+            StartCoroutine(ResetPlayingFlag(selectedSound.length)); // Reset flag after sound finishes
+        }
+        else
+        {
+            Debug.LogWarning("Sound database is not assigned or has no sounds!");
+        }
+    }
 
+
+    private IEnumerator ResetPlayingFlag(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isPlaying = false; // Reset the flag after the sound has finished
+                           // Optionally reset volume here, but it's not necessary if fixedVolume is set
+        Destroy(this.gameObject); // Corrected line
     }
 
     private void CheckForGhosts()
@@ -51,14 +101,8 @@ public class MusicBox : MonoBehaviour
         {
             if (hitCollider.CompareTag("Ghost"))
             {
-                // Get the NavMeshAgent component
-                NavMeshAgent ghostAgent = hitCollider.GetComponent<NavMeshAgent>();
-                if (ghostAgent != null)
-                {
-                    // Set the destination of the ghost to the position of this GameObject
-                    ghostAgent.SetDestination(transform.position);
-                    Debug.Log($"Ghost {hitCollider.gameObject.name} is now moving to the capturing device.");
-                }
+                Debug.Log($"Ghost {hitCollider.gameObject.name} detected!");
+                // Add your ghost handling logic here
             }
         }
     }
@@ -77,4 +121,3 @@ public class MusicBox : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, sphereRadius);
     }
 }
-
