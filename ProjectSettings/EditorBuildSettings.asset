@@ -11,7 +11,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AR_Scenes/StartingScene.unity
     guid: 9edc0ac68b669cd46ae711da25b4df79
+  - enabled: 1
+    path: Assets/Scenes/Levels/Haunted House.unity
+    guid: 1b77823f14d576f40841ef3936494f93
+  - enabled: 1
+    path: Assets/Scenes/Levels/Cemetery.unity
+    guid: a83a6fc36c386fd43b8583299580bd7b
+  - enabled: 1
+    path: Assets/Scenes/AR_Scenes/EndScene.unity
+    guid: 3b0b2ce66a2768f4fb92c4dd85aaf8e0
   m_configObjects:
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: e00091e515377a24b8933463a5d6e98b,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 570e6ffdb4258a6429e274ac9b71894a,
       type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 4f240c4fa06bdd54ea06fe9d7491f489,

@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerExitScript : MonoBehaviour
 {
     public GameObject canvas; // Reference to the canvas to display the message
     private bool isNearExit = false; // To track if the player is near the exit
     public GameObject player; // Reference to the player GameObject
+    public string sceneToLoad;
+
 
     // Assume this method checks if the player has completed the objectives
     public bool HasCompletedObjectives()
@@ -35,20 +38,13 @@ public class PlayerExitScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("COLLIDED WITH EXIT TRIGGER");
-
         if (other.CompareTag("Player"))
         {
-            Debug.Log("PLAYER FOUND!!!!!");
-
-            isNearExit = true;
-
-            // Show the canvas with the message
-            if (canvas != null)
-            {
-                canvas.SetActive(true);
-            }
+            SceneManager.LoadScene(sceneToLoad);
         }
-    }
+
+
+}
 
     private void OnTriggerExit(Collider other)
     {
