@@ -4882,6 +4882,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &1484760697437342713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 174714111684102391}
+  m_Layer: 0
+  m_Name: AnchorPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &174714111684102391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484760697437342713}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5842891, y: 0.39825404, z: 0.5842891, w: 0.39825404}
+  m_LocalPosition: {x: -0.023, y: 1.813, z: -0.006000001}
+  m_LocalScale: {x: 1.6207981, y: 1.6207981, z: 1.6207981}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 418905993911820237}
+  m_LocalEulerAnglesHint: {x: -111.443, y: 90, z: 0}
 --- !u!1 &1527968365905152994
 GameObject:
   m_ObjectHideFlags: 0
@@ -16447,6 +16478,7 @@ Transform:
   - {fileID: 1744252509811953182}
   - {fileID: 4809126237792887064}
   - {fileID: 6799765321978191416}
+  - {fileID: 174714111684102391}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
 --- !u!114 &7325639484937301759
@@ -16467,6 +16499,11 @@ MonoBehaviour:
     type: 3}
   isVacuuming: {fileID: 1628511672764376253}
   isFlashing: {fileID: 827232516692344105}
+  soundDatabase: {fileID: 11400000, guid: 7f207dd6e688d394a809c2ff6ddcc815, type: 2}
+  flasherSoundIndex: 0
+  vacuumSoundIndex: 7
+  vrGhostCapturePrefab: {fileID: 9134401463710747282, guid: dcd1c3f73ebd975469cc33de8f51e25a,
+    type: 3}
 --- !u!1 &6112788606824940379
 GameObject:
   m_ObjectHideFlags: 0

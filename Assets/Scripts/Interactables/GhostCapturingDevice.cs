@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 
@@ -17,9 +16,14 @@ public class GhostCapturingDevice : MonoBehaviour
     // Flag to check if the activation sound has been played
     private bool hasActivated = false;
 
-    private void Start()
+    private void Awake()
     {
-        // Initialize the sphere collider but keep it disabled for now
+        Activate();
+    }
+
+    private void Activate()
+    {
+        // Initialize the sphere collider
         sphereCollider = gameObject.AddComponent<SphereCollider>();
         sphereCollider.isTrigger = true;
         sphereCollider.radius = sphereRadius;
@@ -31,36 +35,10 @@ public class GhostCapturingDevice : MonoBehaviour
 
     private void Update()
     {
-        // Check if the "G" key is held down
-        if (Input.GetKey(KeyCode.G))
+        // Check for active ghosts while the sphere collider is enabled
+        if (sphereCollider.enabled)
         {
-            if (!sphereCollider.enabled) // Only activate if it's not already enabled
-            {
-                Debug.Log("Capturing Device Activated");
-                ActivateSphereCollider();
-            }
-
-            // Check for ghosts within the sphere collider while the key is held
             CheckForGhosts();
-        }
-        else
-        {
-            // Disable the sphere collider and reset sound flags when the key is released
-            if (sphereCollider.enabled)
-            {
-                StartCoroutine(DisableColliderAfterDelay(0f)); // Disable immediately
-                StartCoroutine(DestroyAfterDelay(0f)); // Destroy after a delay
-            }
-
-            // Reset sound play flag
-            hasActivated = false;
-            StopSound(); // Stop any currently playing sounds
-        }
-
-        // Check if the "I" key is held down for destruction after sound ends
-        if (Input.GetKey(KeyCode.I) && hasActivated && !audioSource.isPlaying)
-        {
-            StartCoroutine(DestroyAfterDelay(0f)); // Destroy immediately if sound has ended
         }
     }
 
@@ -69,12 +47,12 @@ public class GhostCapturingDevice : MonoBehaviour
         sphereCollider.enabled = true; // Enable the sphere collider
         Debug.Log("Sphere Collider Activated!");
 
-        // Play activation sound only once
-        if (!hasActivated)
-        {
-            PlaySoundAtIndex(activationSoundIndex); // Play activation sound
-            hasActivated = true; // Set the flag to true
-        }
+        // Play activation sound
+        PlaySoundAtIndex(activationSoundIndex);
+        hasActivated = true; // Set the flag to true
+
+        // Start the timer for destruction after 10 seconds
+        StartCoroutine(DestroyAfterDelay(10f));
     }
 
     private void CheckForGhosts()
@@ -113,34 +91,20 @@ public class GhostCapturingDevice : MonoBehaviour
         }
     }
 
-    private void StopSound()
+    private void OnCollisionEnter(Collision collision)
     {
-        if (audioSource.isPlaying)
+        // Check if the device collides with the ground (default layer)
+        if (collision.gameObject.layer == 0) // Default layer
         {
-            audioSource.Stop();
+            Debug.Log("Capturing Device Activated by Ground Collision");
+            ActivateSphereCollider(); // Activate the sphere collider
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Ghost"))
-        {
-            other.gameObject.layer = 0; // Set to layer 0
-            Debug.Log($"Ghost {other.gameObject.name} entered and switched to layer 0.");
-        }
-    }
-
-    private IEnumerator DisableColliderAfterDelay(float delay)
-    {
-        sphereCollider.enabled = false; // Disable the collider
-        Debug.Log("Sphere Collider Deactivated!");
-        yield return null; // Just wait one frame
     }
 
     private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay); // Wait for the specified delay
-        Debug.Log("Destroying Capturing Device");
+        Debug.Log("Destroying Capturing Device after 10 seconds");
         Destroy(gameObject); // Destroy the capturing device
     }
 
