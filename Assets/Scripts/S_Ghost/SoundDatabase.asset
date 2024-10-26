@@ -22,14 +22,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 87040191998b26c4f83f96b06a70cb49, type: 3}
   - {fileID: 8300000, guid: 74997f7327ec1b640bf3b937a1cb04d6, type: 3}
   - {fileID: 8300000, guid: 23e7577c1335d1c479230493ed369f67, type: 3}
+  - {fileID: 8300000, guid: 8de2abe6b23d8524d80357ffcb0d5a0d, type: 3}
   spiritBoxSoundPatrolling: []
   spiritBoxError:
   - {fileID: 8300000, guid: 981b57b570cfb964f904674731ce835f, type: 3}
   - {fileID: 8300000, guid: cfc0399ba1222514b92f94bb6270e320, type: 3}
   - {fileID: 8300000, guid: 76c7497a78f152643a620577463061b1, type: 3}
-  musicBox:
-  - {fileID: 8300000, guid: 9e04869ced24f3542b462b0cfeec1080, type: 3}
+  musicBoxSounds:
   - {fileID: 8300000, guid: 63b75d2a49860ac4da2c0bd76de6a6b3, type: 3}
-  - {fileID: 8300000, guid: 2563704c85820ca4c8ac5360f63122d7, type: 3}
+  - {fileID: 8300000, guid: 9e04869ced24f3542b462b0cfeec1080, type: 3}
+  - {fileID: 8300000, guid: 15f37f53dab91014d8d51d749404db0d, type: 3}
+  - {fileID: 8300000, guid: 8573aeb98686bb14bb034f6bc799db97, type: 3}
+  - {fileID: 8300000, guid: bfd2b3a9584898044a50406492a2891d, type: 3}
+  - {fileID: 8300000, guid: 1b6171dd9989ecd4d944a2ea6c7f022a, type: 3}
   ghostCapturingDevice: []
   flasher: []

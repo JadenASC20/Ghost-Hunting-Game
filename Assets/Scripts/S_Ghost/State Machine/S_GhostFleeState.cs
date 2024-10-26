@@ -16,7 +16,7 @@ public class S_GhostFleeState : S_GhostBaseState
 
     public override void EnterState(S_GhostStateManager sGhost)
     {
-        Debug.Log("Ghost is Fleeing...");
+        // Debug.Log("Ghost is Fleeing...");
         sGhost.gameObject.layer = 3;        // set ghost to ghostLayer
         playerPosition = sGhost.Player.transform;
         CalculateRandomWaypoint(sGhost);
@@ -74,7 +74,7 @@ public class S_GhostFleeState : S_GhostBaseState
             // Check if the ghost has reached the chosen waypoint
             if (Vector3.Distance(sGhost.transform.position, sGhost.chosenWaypoint.position) < 0.1f)
             {
-                Debug.Log("Ghost has reached the chosen waypoint. Switching to Patrol State.");
+                // Debug.Log("Ghost has reached the chosen waypoint. Switching to Patrol State.");
                 sGhost.SwitchState(sGhost.PatrolState);
             }
 
@@ -87,7 +87,7 @@ public class S_GhostFleeState : S_GhostBaseState
         }
         else
         {
-            Debug.LogWarning("Player reference or chosen waypoint is null.");
+            // Debug.LogWarning("Player reference or chosen waypoint is null.");
         }
     }
 
@@ -108,7 +108,7 @@ public class S_GhostFleeState : S_GhostBaseState
         while (Vector3.Distance(playerPosition.position, randomWaypoint.position) <= safeDistance);
 
         sGhost.chosenWaypoint = randomWaypoint;
-        Debug.Log($"Moving to waypoint: {randomWaypoint.name}");
+        // Debug.Log($"Moving to waypoint: {randomWaypoint.name}");
     }
 }
 
