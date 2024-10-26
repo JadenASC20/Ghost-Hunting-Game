@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efd59ca0df460e4ca3fd96df6e1b571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sphereRadius: 5
+  soundDatabase: {fileID: 0}
+  soundIndex: 0
 --- !u!1 &921437096436042952
 GameObject:
   m_ObjectHideFlags: 0
@@ -4926,7 +4929,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4809126237792887064}
   - component: {fileID: 31565408528367469}
-  - component: {fileID: 8541314129959573332}
   m_Layer: 0
   m_Name: Vacuuming
   m_TagString: Untagged
@@ -4963,6 +4965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d0bd02c78435241b1dc7a57571dd71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attractPoint: {fileID: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
   spawnRotation: {x: 0, y: 0, z: 0, w: 1}
   particlesObject: {fileID: 5460721633391414788}
@@ -4971,33 +4974,6 @@ MonoBehaviour:
   ghostCapture: {fileID: 4926591851717733550}
   ghostCaptureExplosion: {fileID: 5141566665923562890}
   delay: 2
---- !u!54 &8541314129959573332
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628511672764376253}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &2085514848563996521
 GameObject:
   m_ObjectHideFlags: 0
@@ -10343,7 +10319,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.49999997
   m_Center: {x: 0, y: 0, z: 0}
