@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ghost
   - Floor
+  - Marker
   layers:
   - Default
   - TransparentFX
